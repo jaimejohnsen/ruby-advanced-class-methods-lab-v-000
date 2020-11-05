@@ -39,7 +39,9 @@ class Song
   def self.find_by_name(name) #accept a string
     #I need to iterate over @@all to check for matching song names
   self.all.find { |song| song.name == name }# checking each song objects name attribute in the array
-  end
+end                   #|song| gives access to each element one at a time in the array
+                      #song.name gives access to the name attribute of every song object in array
+                      #==name is then comparing the accessed information to the name argument passed in
 
   def self.find_or_create_by_name(name)
    self.find_by_name(name) || self.create_by_name(name)
@@ -52,7 +54,6 @@ class Song
   def self.new_from_filename(filename)  #this ia a class constructor. A constructor 1.Allocates space for the object
     song = self.new #new instance       #2.assigns instance variables their initial value #3. Returns the instance of that class
     split_filename = filename.chomp(".mp3").split(" - ") #need to split filename up and remove the end of string
-binding.pry
     song.name = split_filename[1]
     song.artist_name = split_filename[0]
     song
@@ -60,7 +61,7 @@ binding.pry
 
   def self.create_from_filename(filename) #this is a class constructor
     song = self.create #returns the instance of Song which has an object ID
-    split_filename = filename.chomp('.mp3').split(" - ") #need to split filename up and remove the end of string
+    split_filename = filename.chomp('.mp3').split(" - ") #need to split filename int an array of strings,remove the end of string
     song.name = split_filename[1] # setting the name attribute equal to the element at the index in split_filename
     song.artist_name = split_filename[0]
     song  # returns object Id wich now has the attributes that we set in line 64 and 65
